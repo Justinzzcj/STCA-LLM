@@ -33,7 +33,6 @@ class stcllm(nn.Module):
         self.d_model = configs.d_model
         self.adj = adj
         self.dropout = configs.dropout
-        self.num_channels = [16, 32, 20]
         self.adj = torch.Tensor(self.adj).to(self.device)
         self.gpt = GPT4TS(device=self.device, gpt_layers=6)
         self.attention = Attention(dim=self.d_model, heads=16, dropout=self.dropout)
@@ -62,3 +61,4 @@ class stcllm(nn.Module):
         output = output * stdev + means
         output = output.permute(0, 2, 1)
         return output
+
